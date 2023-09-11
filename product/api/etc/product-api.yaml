@@ -15,11 +15,11 @@ Log:
 
 # 七牛云配置
 Qiniu:
-  AccessKey: CDwYoreeExWYFU3w-ZMX6CmqOunbPDbIyivQo30M
-  SecretKey: eqvk6OEp35Ud1-z-wuRQE3F70-Jt94Xmi5ik2Xg2
+  AccessKey: AccessKey
+  SecretKey: SecretKey
   Bucket: go-zero-shop-product
   CDN: http://rvx9qktl4.hn-bkt.clouddn.com/
-  Zone: z2
+  Zone: Zone
   Prefix: zero-shop
 
 # ProductRpc服务配置
