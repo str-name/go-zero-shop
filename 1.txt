@@ -1,0 +1,6 @@
+goctl api go -api .\payment.api -dir ../ -style goZero -home ..\..\..\
+
+
+
+
+goctl rpc protoc .\user.proto --go_out=../ --go-grpc_out=../ --zrpc_out=../ -home ..\..\..\

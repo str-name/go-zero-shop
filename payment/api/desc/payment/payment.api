@@ -1,0 +1,19 @@
+syntax = "v1"
+
+info(
+    title: "payment.api"
+    desc: "支付模块"
+    author: "strangers"
+    version: "v1"
+)
+
+type (
+    OrderPayReq {
+        OrderSn         string      `json:"orderSn"`
+        ServiceType     int64       `json:"serviceType"`
+    }
+    OrderPayResp {
+        PayTotalPrice   float64     `json:"payTotalPrice"`
+        PaySn           string      `json:"paySn"`
+    }
+)

@@ -1,0 +1,28 @@
+Name: cart.rpc
+ListenOn: 0.0.0.0:8084
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: cart.rpc
+
+# log配置
+Log:
+  ServiceName: cart-rpc
+  Level: error
+
+# ProductRpc服务配置
+ProductRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: product.rpc
+  NonBlock: true
+
+# UserRpc服务配置
+UserRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: user.rpc
+  NonBlock: true
+

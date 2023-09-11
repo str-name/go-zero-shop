@@ -1,0 +1,153 @@
+syntax = "v1"
+
+info(
+    title: "user.api"
+    desc: "用户模块"
+    author: "strangers"
+    version: "v1"
+)
+
+type JwtAccess {
+    AccessToken     string      `json:"accessToken"`
+    AccessExpire    int64       `json:"accessExpire"`
+    RefreshAfter    int64       `json:"refreshAfter"`
+}
+
+type User {
+    ID              int64       `json:"id"`
+    Mobile          string      `json:"mobile"`
+    Username        string      `json:"username"`
+    Email           string      `json:"email"`
+    Sex             int64       `json:"sex"`
+    HeaderImg       string      `json:"headerImg"`
+    Signature       string      `json:"signature"`
+    Introduction    string      `json:"introduction"`
+}
+
+type (
+    RegisterReq {
+        Mobile      string      `json:"mobile"`
+        Password    string      `json:"password"`
+        RePassword  string      `json:"rePassword"`
+    }
+    RegisterResp {
+        JwtAccess   JwtAccess   `json:"jwtAccess"`
+    }
+)
+
+type (
+    LoginReq {
+        Mobile      string  `json:"mobile"`
+        Password    string  `json:"password"`
+    }
+    LoginResp {
+        JwtAccess   JwtAccess   `json:"jwtAccess"`
+    }
+)
+
+type (
+    SendCodeReq {
+        Email string `json:"email"`
+    }
+)
+
+type (
+    LogoutReq {
+        AccessToken string  `json:"accessToken"`
+    }
+)
+
+type (
+    GetUserInfoResp {
+        UserInfo    User    `json:"userInfo"`
+    }
+)
+
+
+type (
+    EmailReq {
+        Email       string      `json:"email"`
+        Password    string      `json:"password"`
+        Code        string      `json:"code"`
+    }
+)
+
+type (
+    UpdateUserInfoReq {
+        Username        string  `json:"username"`
+        Sex             int64   `json:"sex"`
+        Signature       string  `json:"signature"`
+        Introduction    string  `json:"introduction"`
+    }
+)
+
+type (
+    UpdatePasswordReq {
+        OldPassword     string  `json:"oldPassword"`
+        NewPassword     string  `json:"newPassword"`
+        RePassword      string  `json:"rePassword"`
+    }
+)
+
+type (
+    UploadUserImgReq {
+        UserID  int64  `form:"userId"`
+    }
+)
+
+type (
+    GetUserMoneyReq {
+        Password    string  `json:"password"`
+    }
+    GetUserMoneyResp {
+        Money   float64   `json:"money"`
+    }
+)
+
+type Address {
+    ID              int64   `json:"id"`
+    IsDefault       int64   `json:"isDefault"`
+    Province        string  `json:"province"`
+    City            string  `json:"city"`
+    Region          string  `json:"region"`
+    DetailAddress   string  `json:"detailAddress"`
+    Name            string  `json:"name"`
+    Phone           string  `json:"phone"`
+}
+
+type (
+    UserAddressListResp {
+        List    []Address   `json:"list"`
+    }
+)
+
+type (
+    CreateUserAddressReq {
+        IsDefault       int64   `json:"isDefault"`
+        Province        string  `json:"province"`
+        City            string  `json:"city"`
+        Region          string  `json:"region"`
+        DetailAddress   string  `json:"detailAddress"`
+        Name            string  `json:"name"`
+        Phone           string  `json:"phone"`
+    }
+)
+
+type (
+    UpdateUserAddressReq {
+        ID              int64   `json:"id"`
+        IsDefault       int64   `json:"isDefault"`
+        Province        string  `json:"province"`
+        City            string  `json:"city"`
+        Region          string  `json:"region"`
+        DetailAddress   string  `json:"detailAddress"`
+        Name            string  `json:"name"`
+        Phone           string  `json:"phone"`
+    }
+)
+
+type (
+    DeleteUserAddressReq {
+        ID      int64   `json:"id"`
+    }
+)

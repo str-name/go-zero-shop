@@ -1,0 +1,25 @@
+syntax = "v1"
+
+info(
+	title: "payment.api"
+	desc: "支付模块"
+	author: "strangers"
+	version: "v1"
+)
+
+import "payment/payment.api"
+
+//  本地账户支付功能
+@server(
+	group: payment
+	prefix: payment/v1
+	jwt: JwtAuth
+	middleware: CheckUserState
+)
+service payment-api {
+	@doc "订单付款"
+	@handler orderPay
+	post /payment  (OrderPayReq) returns (OrderPayResp)
+}
+
+// 待实现：第三方支付功能

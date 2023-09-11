@@ -1,0 +1,26 @@
+Name: user.rpc
+ListenOn: 0.0.0.0:8081
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: user.rpc
+
+# JWT配置
+JwtAuth:
+  AccessSecret: ae0536f9-6450-4606-8e13-5a19ed505da0
+  AccessExpire: 604800    # 7天的过期时间604800，1天为86400
+
+# log配置
+Log:
+  ServiceName: user-rpc
+  Level: error
+
+# Mysql配置
+MysqlConf:
+  DSN: root:gaj991130@tcp(127.0.0.1:3306)/zero_shop_user?charset=utf8mb4&parseTime=True&loc=Local
+# Redis配置
+RedisConf:
+  Addr: 8.134.154.235:6379
+  Password: gaj991130
+  DB: 4
+  PoolSize: 100

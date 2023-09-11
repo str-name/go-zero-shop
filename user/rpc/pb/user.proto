@@ -1,0 +1,187 @@
+syntax = "proto3";
+
+package pb;
+option go_package="./pb";
+
+service user {
+  // user
+  rpc register(RegisterReq) returns (RegisterResp);
+  rpc login(LoginReq) returns (LoginResp);
+  rpc generateToken(GenerateTokenReq) returns (GenerateTokenResp);
+  rpc logout(LogoutReq) returns (LogoutResp);
+  rpc getUserInfo(GetUserInfoReq) returns (GetUserInfoResp);
+  rpc updateEmail(UpdateEmailReq) returns (UpdateEmailResp);
+  rpc updatePassword(UpdatePasswordReq) returns (UpdatePasswordResp);
+  rpc updateUserInfo(UpdateUserInfoReq) returns (UpdateUserInfoResp);
+  rpc getUserMoney(GetUserMoneyReq) returns (GetUserMoneyResp);
+
+  // userAddress
+  rpc getUserAddressList(GetUserAddressListReq) returns (GetUserAddressListResp);
+  rpc createUserAddress(CreateUserAddressReq) returns (CreateUserAddressResp);
+  rpc updateUserAddress(UpdateUserAddressReq) returns (UpdateUserAddressResp);
+  rpc deleteUserAddress(DeleteUserAddressReq) returns (DeleteUserAddressResp);
+  rpc getUserAddressDetail(GetUserAddressDetailReq) returns (GetUserAddressDetailResp);
+
+  // other
+  rpc checkUserExists(CheckUserExistsReq) returns (CheckUserExistsResp);
+  rpc checkUserAndAddressExists(CheckUserAndAddressExistsReq) returns (CheckUserAndAddressExistsResp);
+  rpc updateUserMoney(UpdateUserMoneyReq) returns (UpdateUserMoneyResp);
+}
+
+message RegisterReq {
+  string  Mobile  = 1;
+  string  Password = 2;
+  string  RePassword = 3;
+}
+message RegisterResp {
+  string  AccessToken  = 1;
+  int64   AccessExpire = 2;
+  int64   RefreshAfter = 3;
+}
+
+message LoginReq {
+  string  Mobile = 1;
+  string  Password = 2;
+}
+message LoginResp {
+  string AccessToken = 1;
+  int64  AccessExpire = 2;
+  int64  RefreshAfter = 3;
+}
+
+message GenerateTokenReq {
+  int64 UserID = 1;
+  int64 State = 2;
+  int64 IsBoss = 3;
+}
+message GenerateTokenResp {
+  string  AccessToken  = 1;
+  int64   AccessExpire = 2;
+  int64   RefreshAfter = 3;
+}
+
+message LogoutReq {
+  int64   UserID = 1;
+  int64   Expire = 2;
+  string  AccessToken = 3;
+}
+message LogoutResp {}
+
+message GetUserInfoReq {
+  int64   UserID = 1;
+}
+message GetUserInfoResp {
+  int64   ID = 1;
+  string  Mobile = 2;
+  string  Username = 3;
+  string  Email = 4;
+  int64   Sex = 5;
+  string  HeaderImg = 6;
+  string  Signature = 7;
+  string  Introduction = 8;
+  int64   Money = 9;
+}
+
+message UpdateEmailReq {
+  int64   UserID = 1;
+  string  Email = 2;
+  string  Password = 3;
+  string  Code = 4;
+}
+message UpdateEmailResp {}
+
+message UpdatePasswordReq {
+  int64   UserID = 1;
+  string  OldPassword = 2;
+  string  NewPassword = 3;
+  string  RePassword = 4;
+}
+message UpdatePasswordResp {}
+
+message UpdateUserInfoReq {
+  int64   UserID = 1;
+  string  Username = 2;
+  string  Signature = 3;
+  string  Introduction = 4;
+  int64   Sex = 5;
+}
+message UpdateUserInfoResp {}
+
+message GetUserMoneyReq {
+  int64   UserID = 1;
+  string  Password = 2;
+}
+message GetUserMoneyResp {
+  int64   Money = 1;
+}
+
+message Address {
+  int64   ID = 1;
+  int64   IsDefault = 2;
+  string  Province = 3;
+  string  City = 4;
+  string  Region = 5;
+  string  DetailAddress = 6;
+  string  Name = 7;
+  string  Phone = 8;
+}
+message GetUserAddressListReq {
+  int64   UserID = 1;
+}
+message GetUserAddressListResp {
+  repeated Address  Addresses = 1;
+}
+
+message CreateUserAddressReq {
+  int64   UserID = 1;
+  Address Address = 2;
+}
+message CreateUserAddressResp {}
+
+message UpdateUserAddressReq {
+  int64   UserID = 1;
+  Address Address = 2;
+}
+message UpdateUserAddressResp {}
+
+message DeleteUserAddressReq {
+  int64 ID = 1;
+  int64 UserID = 2;
+}
+message DeleteUserAddressResp {}
+
+message GetUserAddressDetailReq {
+  int64 AddressID = 1;
+}
+message GetUserAddressDetailResp {
+  int64   ID = 1;
+  int64   UserID = 2;
+  int64   IsDefault = 3;
+  string  Province = 4;
+  string  City = 5;
+  string  Region = 6;
+  string  DetailAddress = 7;
+  string  Name = 8;
+  string  Phone = 9;
+}
+
+message CheckUserExistsReq {
+  int64 UserID = 1;
+}
+message CheckUserExistsResp {
+  bool IsExists = 1;
+}
+
+message CheckUserAndAddressExistsReq {
+  int64 UserID = 1;
+  int64 AddressID = 2;
+}
+message CheckUserAndAddressExistsResp {
+  bool IsExists = 1;
+}
+
+message UpdateUserMoneyReq{
+  int64 UserID = 1;
+  int64 Money = 2;
+}
+message UpdateUserMoneyResp {}

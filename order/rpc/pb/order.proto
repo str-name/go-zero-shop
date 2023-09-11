@@ -1,0 +1,115 @@
+syntax = "proto3";
+
+package pb;
+option go_package="./pb";
+
+service order {
+  rpc createProductOrder(CreateProductOrderReq) returns (CreateOrderResp);
+  rpc createSeckillOrder(CreateSeckillOrderReq) returns (CreateOrderResp);
+  rpc orderList(OrderListReq) returns (OrderListResp);
+  rpc orderDetail(OrderDetailReq) returns (OrderDetailResp);
+  rpc deleteOrder(DeleteOrderReq) returns (DeleteOrderResp);
+  rpc updateOrderStatus(UpdateOrderStatusReq) returns (UpdateOrderStatusResp);
+
+  // other
+  rpc getOrderOnlyDetail(GetOrderOnlyDetailReq) returns (GetOrderOnlyDetailResp);
+}
+
+message SmallOrder {
+  string    OrderSn = 1;
+  string    Title = 2;
+  string    SubTitle = 3;
+  int64     ProductID = 4;
+  string    Banner = 5;
+  int64     TotalPrice = 6;
+  string    Status = 7;
+}
+
+message CreateProductOrderReq {
+  int64   UserID = 1;
+  int64   ProductID = 2;
+  int64   UserAddressID = 3;
+  int64   ProductCount = 4;
+  string  Remark = 5;
+}
+message CreateSeckillOrderReq {
+  int64   UserID = 1;
+  int64   SeckillID = 2;
+  int64   UserAddressID = 3;
+  int64   ProductCount = 4;
+  string  Remark = 5;
+}
+message CreateOrderResp {
+  string  OrderSn = 1;
+}
+
+message OrderListReq {
+  int64   UserID = 1;
+  int64   Page = 2;
+  int64   Size = 3;
+  int64   Status = 4;
+}
+message OrderListResp {
+  repeated SmallOrder OrderList = 1;
+}
+
+message OrderDetailReq {
+  int64   UserID = 1;
+  string  OrderSn = 2;
+}
+message OrderDetailResp {
+  int64   ID = 1;
+  string  CreateTime = 2;
+  string  UpdateTime = 3;
+  string  OrderSn = 4;
+  int64   UserID = 5;
+  string  AddressDetail = 6;
+  string  AddressPhoneName = 7;
+  int64   ProductID = 8;
+  string  Title = 9;
+  string  SubTitle = 10;
+  string  Banner = 11;
+  string  Info = 12;
+  int64   ProductStoreID = 13;
+  int64   ProductBossID = 14;
+  int64   ProductCount = 15;
+  int64   UnitPrice = 16;
+  int64   TotalPrice = 17;
+  int64   Status = 18;
+  string  Remark = 19;
+  string  PayTime = 20;
+  string  PayType = 21;
+}
+
+message DeleteOrderReq {
+  int64   UserID = 1;
+  string  OrderSn = 2;
+}
+message DeleteOrderResp {}
+
+message UpdateOrderStatusReq {
+  string OrderSn = 1;
+  int64  UserID = 2;
+  int64  OrderStatus = 3;
+}
+message UpdateOrderStatusResp {}
+
+message GetOrderOnlyDetailReq {
+  int64   UserID = 1;
+  string  OrderSn = 2;
+}
+message GetOrderOnlyDetailResp {
+  int64   ID = 1;
+  string  CreateTime = 2;
+  string  UpdateTime = 3;
+  string  OrderSn = 4;
+  int64   UserID = 5;
+  int64   ProductID = 8;
+  int64   ProductStoreID = 13;
+  int64   ProductBossID = 14;
+  int64   ProductCount = 15;
+  int64   UnitPrice = 16;
+  int64   TotalPrice = 17;
+  int64   Status = 18;
+  string  Remark = 19;
+}

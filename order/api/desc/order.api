@@ -1,0 +1,38 @@
+syntax = "v1"
+
+info(
+	title: "order.api"
+	desc: "订单模块"
+	author: "strangers"
+	version: "v1"
+)
+
+import "order/order.api"
+
+@server(
+	group: order
+	prefix: order/v1
+	jwt: JwtAuth
+	middleware: CheckUserState
+)
+service order-api {
+	@doc "创建普通商品订单"
+	@handler createProductOrder
+	post /order/product  (CreateProductOrderReq) returns (CreateOrderResp)
+	
+	@doc "创建秒杀商品订单"
+	@handler createSeckillOrder
+	post /order/seckill (CreateSeckillOrderReq) returns (CreateOrderResp)
+	
+	@doc "订单列表"
+	@handler orderList
+	get /order/list (GetOrderListReq) returns (GetOrderListResp)
+	
+	@doc "订单详情"
+	@handler orderDetail
+	get /order/detail  (GetOrderDetailReq) returns (GetOrderDetailResp)
+	
+	@doc "删除订单信息"
+	@handler deleteOrder
+	delete /order   (DeleteOrderReq)
+}

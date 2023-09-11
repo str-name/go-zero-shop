@@ -1,0 +1,26 @@
+syntax = "v1"
+
+info(
+    title: "product.api"
+    desc: "商品模块"
+    author: "strangers"
+    version: "v1"
+)
+
+type (
+    CreateCollectProductReq {
+        ProductID	int64	`json:"productId"`
+    }
+)
+
+type (
+    CollectProductListResp {
+        Products	[]SmallProduct	`json:"products"`
+    }
+)
+
+type (
+    DeleteCollectProductReq {
+        ProductID	int64 	`json:"productId"`
+    }
+)

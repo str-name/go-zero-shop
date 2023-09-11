@@ -1,0 +1,33 @@
+Name: payment.rpc
+ListenOn: 0.0.0.0:8085
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: payment.rpc
+
+# log配置
+Log:
+  ServiceName: payment-rpc
+  Level: error
+
+# UserRpc服务配置
+UserRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: user.rpc
+  NonBlock: true
+
+# OrderRpc服务配置
+OrderRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: order.rpc
+  NonBlock: true
+
+# KqPaymentUpdateOrderStateConf配置
+KqPaymentUpdateOrderStateConf:
+  Brokers:
+    - 8.134.154.235:9092
+  Topic: payment-update-order-state-topic

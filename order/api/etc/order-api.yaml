@@ -1,0 +1,29 @@
+Name: order-api
+Host: 0.0.0.0
+Port: 1004
+
+# JWT配置
+JwtAuth:
+  AccessSecret: ae0536f9-6450-4606-8e13-5a19ed505da0
+  AccessExpire: 604800    # 7天的过期时间，1天为86400
+
+# log配置
+Log:
+  ServiceName: order-api
+  Level: error
+
+# OrderRpc服务配置
+OrderRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: order.rpc
+  NonBlock: true
+
+# UserRpc服务配置
+UserRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: user.rpc
+  NonBlock: true

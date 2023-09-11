@@ -1,0 +1,106 @@
+syntax = "v1"
+
+info(
+	title: "user.api"
+	desc: "用户模块"
+	author: "strangers"
+	version: "v1"
+)
+
+import "user/user.api"
+
+// no need login
+@server(
+	group: user
+	prefix: user/v1
+)
+service user-api {
+	@doc "用户注册"
+	@handler register
+	post /register (RegisterReq) returns (RegisterResp)
+	
+	@doc "用户登录"
+	@handler login
+	post /login (LoginReq) returns (LoginResp)
+}
+
+// need login
+@server(
+	jwt: JwtAuth
+	group: user
+	prefix: user/v1
+	middleware: CheckUserState
+)
+service user-api {
+	@doc "用户退出"
+	@handler logout
+	post /logout (LogoutReq)
+	
+	@doc "邮箱验证码发送"
+	@handler sendCode
+	post /sendcode (SendCodeReq)
+}
+
+// need login
+// 用户基本信息功能
+@server(
+	jwt: JwtAuth
+	group: userInfo
+	prefix: user/v1
+	middleware: CheckUserState
+)
+service user-api {
+	@doc "绑定邮箱"
+	@handler bindEmail
+	post /userinfo/bindemail    (EmailReq)
+	
+	@doc "用户基本信息展示"
+	@handler userInfo
+	get /userinfo   returns (GetUserInfoResp)
+	
+	@doc "修改邮箱"
+	@handler updateEmail
+	post /userinfo/email	(EmailReq)
+	
+	@doc "修改用户基本信息"
+	@handler updateUserInfo
+	put /userinfo	(UpdateUserInfoReq)
+	
+	@doc "修改密码"
+	@handler updatePassword
+	post /userinfo/password (UpdatePasswordReq)
+	
+	@doc "上传头像"
+	@handler uploadUserImg
+	post /userinfo/uploaduserimg (UploadUserImgReq)
+	
+	@doc "获取账户金额"
+	@handler getUserMoney
+	get /userinfo/usermoney		(GetUserMoneyReq) returns (GetUserMoneyResp)
+}
+
+// need login
+// 用户收货地址功能
+@server(
+	jwt: JwtAuth
+	group: userAddress
+	prefix: user/v1
+	middleware: CheckUserState
+)
+service user-api {
+	@doc "添加收货地址"
+	@handler createUserAddress
+	post /address	(CreateUserAddressReq)
+	
+	@doc "用户收货地址列表"
+	@handler userAddressList
+	get /address returns (UserAddressListResp)
+	
+	@doc "更新收货地址"
+	@handler updateUserAddress
+	put /address	(UpdateUserAddressReq)
+	
+	@doc "删除收货地址"
+	@handler deleteUserAddress
+	delete /address 	(DeleteUserAddressReq)
+}

@@ -1,0 +1,117 @@
+syntax = "v1"
+
+info(
+	title: "product.api"
+	desc: "商品模块"
+	author: "strangers"
+	version: "v1"
+)
+
+type BasePage {
+	Page	int64 	`json:"page"`
+	Size	int64 	`json:"size"`
+}
+
+type Category {
+	ID		int64 	`json:"id"`
+	Name	string	`json:"name"`
+}
+
+type SmallProduct {
+	ID				int64 	`json:"id"`
+	Title			string	`json:"title"`
+	Banner			string	`json:"banner"`
+	Price			float64	`json:"price"`
+	DiscountPrice 	float64	`json:"discountPrice"`
+}
+
+type Product {
+	ID				int64 	`json:"id"`
+	CategoryID		int64 	`json:"categoryId"`
+	Title			string	`json:"title"`
+	SubTitle		string	`json:"subTitle"`
+	Banner			string	`json:"banner"`
+	Introduction	string	`json:"introduction"`
+	Price			float64 `json:"price"`
+	DiscountPrice	float64 `json:"discountPrice"`
+	OnSale			int64 	`json:"onSale"`
+	SellCount		int64 	`json:"sellCount"`
+	CommentCount	int64 	`json:"commentCount"`
+	StoreID			int64 	`json:"storeId"`
+	BossID			int64 	`json:"bossId"`
+}
+
+type Comment {
+	ID			int64 	`json:"id"`
+	UserID		int64 	`json:"userId"`
+	ProductID	int64 	`json:"productId"`
+	IsGood		int64 	`json:"isGood"`
+	Content		string	`json:"content"`
+	AddContent	string	`json:"addContent"`
+}
+
+type SeckillProduct {
+	Product
+	SeckillPrice	float64 `json:"seckillPrice"`
+	StockCount		int64 	`json:"stockCount"`
+	StartTime		string	`json:"startTime"`
+	Time			int64 	`json:"time"`
+}
+
+type Carousel {
+	ProductID		int64 	`json:"productId"`
+	ImgPath			string	`json:"imgPath"`
+}
+
+type (
+	HomePageCarouselResp {
+		Carousels	[]Carousel	`json:"carousels"`
+	}
+)
+
+type (
+	HomePageCategoryResp {
+		CategoryList	[]Category	`json:"categoryList"`
+	}
+)
+
+type (
+	RecommendProductResp {
+		Products	[]SmallProduct	`json:"products"`
+	}
+)
+
+type (
+	SearchProductReq {
+		Keyword		string		`json:"keyword"`
+		Sort		string		`json:"sort"`
+		OnSale		int64 		`json:"onSale"`
+		CategoryID	int64 		`json:"categoryId"`
+		BasePage
+	}
+	SearchProductResp {
+		Products	[]SmallProduct	`json:"products"`
+	}
+)
+
+type (
+	CategoryProductListReq {
+		CategoryID		int64 	`json:"categoryId"`
+		Sort			string	`json:"sort"`
+		BasePage
+	}
+	CategoryProductListResp {
+		Products	[]SmallProduct	`json:"products"`
+	}
+)
+
+type (
+	ProductDetailReq {
+		ProductID	int64 	`json:"productId"`
+		BasePage									// 评论分页的Page
+	}
+	ProductDetailResp {
+		Product		Product 	`json:"product"`
+		Comments	[]Comment	`json:"comments"`
+	}
+)

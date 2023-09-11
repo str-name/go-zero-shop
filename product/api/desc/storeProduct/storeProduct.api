@@ -1,0 +1,70 @@
+syntax = "v1"
+
+info(
+    title: "product.api"
+    desc: "商品模块"
+    author: "strangers"
+    version: "v1"
+)
+
+type (
+    CreateProductReq {
+        CategoryID		int64 	`form:"categoryId"`
+        Title			string	`form:"title"`
+        SubTitle		string	`form:"subTitle"`
+        Introduction	string	`form:"introduction"`
+        Price			float64 `form:"price"`
+        OnSale			int64 	`form:"onSale"`
+        Stock			int64 	`form:"stock"`
+        StoreID			int64 	`form:"storeId"`
+    }
+)
+
+type (
+    ShelfProductReq {
+        ProductIDs 	[]int64 	`json:"productIds"`
+    }
+)
+
+type (
+    UpdateProductReq {
+        ProductID		int64 	`form:"productId"`
+        CategoryID		int64 	`form:"categoryId"`
+        Title			string	`form:"title"`
+        SubTitle		string	`form:"subTitle"`
+        Introduction	string	`form:"introduction"`
+        Price			float64 `form:"price"`
+        DiscountPrice   float64 `form:"discountPrice"`
+        OnSale			int64 	`form:"onSale"`
+        Stock			int64 	`form:"stock"`
+    }
+)
+
+type (
+    SoldoutProductReq {
+        ProductIDs	[]int64 	`json:"productIDs"`
+    }
+)
+
+type (
+    DeleteProductReq {
+        ProductIDs	[]int64 	`json:"productIDs"`
+    }
+)
+
+type (
+    CreateSeckillProductReq {
+        ProductID		int64 	`json:"productId"`
+        StoreID			int64 	`json:"storeId"`
+        SeckillPrice	float64 `json:"seckillPrice"`
+        StockCount		int64 	`json:"stockCount"`
+        StartTime		string	`json:"startTime"`
+        Time			int64 	`json:"time"`
+    }
+)
+
+type (
+    DeleteSeckillProductReq {
+        SeckillID int64 `json:"seckillId"`
+    }
+)

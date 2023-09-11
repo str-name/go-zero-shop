@@ -1,0 +1,42 @@
+Name: order-mq
+Host: 0.0.0.0
+Port: 3001
+Mode: dev
+
+Log:
+  ServiceName: order-mq
+  Level: error
+
+# Redis配置
+RedisConf:
+  Addr: 8.134.154.235:6379
+  Password: gaj991130
+  DB: 4
+  PoolSize: 100
+
+# PaymentUpdateOrderState配置
+PaymentUpdateOrderState:
+  Name: PaymentUpdateOrderState
+  Brokers:
+    - 8.134.154.235:9092
+  Group: payment-update-order-state-group
+  Topic: payment-update-order-state-topic
+  Offset: first
+  Consumers: 1
+  Processors: 1
+
+# OrderRpc服务配置
+OrderRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: order.rpc
+  NonBlock: true
+
+# UserRpc服务配置
+UserRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: user.rpc
+  NonBlock: true

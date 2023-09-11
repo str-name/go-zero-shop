@@ -1,0 +1,119 @@
+syntax = "v1"
+
+info(
+	title: "product.api"
+	desc: "商品模块"
+	author: "strangers"
+	version: "v1"
+)
+
+import(
+	"commonProduct/commonProduct.api"
+	"seckillProduct/seckillProduct.api"
+	"storeProduct/storeProduct.api"
+	"userProduct/userProduct.api"
+)
+
+// 通用商品模块
+@server(
+	group: commonProduct
+	prefix: product/v1
+)
+service product-api {
+	@doc "首页商品轮播图"
+	@handler carousel
+	get /homepage/carousel  returns (HomePageCarouselResp)
+	
+	@doc "首页分类名称列表"
+	@handler categoryList
+	get /homepage/categorylist  returns (HomePageCategoryResp)
+	
+	@doc "首页商品推荐列表"
+	@handler recommend
+	get /homepage/recommend    returns (RecommendProductResp)
+	
+	@doc "商品搜索"
+	@handler searchProduct
+	post /homepage/search   (SearchProductReq) returns (SearchProductResp)
+	
+	@doc "商品分类列表"
+	@handler categoryProductList
+	get /product/category   (CategoryProductListReq) returns (CategoryProductListResp)
+	
+	@doc "商品详情信息"
+	@handler productDetail
+	get /product/detail (ProductDetailReq) returns (ProductDetailResp)
+}
+
+// 商家商品模块
+@server(
+	group: storeProduct
+	prefix: product/v1
+	jwt: JwtAuth
+	middleware: CheckStoreState
+)
+service product-api {
+	@doc "上传商品（未上架）"
+	@handler createProduct
+	post /store/product  (CreateProductReq)
+	
+	@doc "上架商品"
+	@handler shelfProduct
+	post /store/shelf   (ShelfProductReq)
+	
+	@doc "修改商品信息"
+	@handler updateProduct
+	put /store/product  (UpdateProductReq)
+	
+	@doc "下架商品"
+	@handler soldoutProduct
+	post /store/soldout (SoldoutProductReq)
+	
+	@doc "删除商品"
+	@handler deleteProduct
+	delete /store/product  (DeleteProductReq)
+	
+	@doc "添加秒杀商品"
+	@handler createSeckill
+	post /store/seckill  (CreateSeckillProductReq)
+	
+	@doc "删除秒杀商品"
+	@handler deleteSeckill
+	delete /store/seckill (DeleteSeckillProductReq)
+}
+
+// 用户商品模块
+@server(
+	group: userProduct
+	prefix: product/v1
+	jwt: JwtAuth
+	middleware: CheckUserState
+)
+service product-api {
+	@doc "添加收藏商品"
+	@handler createCollectProduct
+	post /collect/product   (CreateCollectProductReq)
+	
+	@doc "收藏商品列表"
+	@handler collectProductList
+	get /collect/product   returns (CollectProductListResp)
+	
+	@doc "删除收藏商品"
+	@handler deleteCollectProduct
+	delete /collect/product  (DeleteCollectProductReq)
+}
+
+// 秒杀商品模块
+@server(
+	group: seckillProduct
+	prefix: product/v1
+)
+service product-api {
+	@doc "秒杀商品列表"
+	@handler seckillList
+	get /seckill/list  (GetSeckillListReq) returns (GetSeckillListResp)
+	
+	@doc "秒杀商品详情"
+	@handler seckillDetail
+	get /seckill/detail (GetSeckillDetailReq) returns (GetSeckillDetailResp)
+}

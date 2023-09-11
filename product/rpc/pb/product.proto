@@ -1,0 +1,276 @@
+syntax = "proto3";
+
+package pb;
+option go_package="./pb";
+
+service product {
+  // commonProduct
+  rpc carousel(CarouselReq) returns (CarouselResp);
+  rpc categoryList(CategoryListReq) returns (CategoryListResp);
+  rpc recommend(RecommendReq) returns (RecommendResp);
+  rpc searchProduct(SearchProductReq) returns (SearchProductResp);
+  rpc categoryProductList(CategoryProductListReq) returns (CategoryProductListResp);
+  rpc productDetail(ProductDetailReq) returns (ProductDetailResp);
+  rpc productCommentList(ProductCommentListReq) returns (ProductCommentListResp);
+
+  // storeProduct
+  rpc createProduct(CreateProductReq) returns (CreateProductResp);
+  rpc shelfProduct(ShelfProductReq) returns (ShelfProductResp);
+  rpc updateProduct(UpdateProductReq) returns (UpdateProductResp);
+  rpc soldoutProduct(SoldoutProductReq) returns (SoldoutProductResp);
+  rpc deleteProduct(DeleteProductReq) returns (DeleteProductResp);
+  rpc createSeckill(CreateSeckillReq) returns (CreateSeckillResp);
+  rpc deleteSeckill(DeleteSeckillReq) returns (DeleteSeckillResp);
+
+  // userProduct
+  rpc createCollectProduct(CreateCollectProductReq) returns (CreateCollectProductResp);
+  rpc collectProductList(CollectProductListReq) returns (CollectProductListResp);
+  rpc deleteCollectProduct(DeleteCollectProductReq) returns (DeleteCollectProductResp);
+
+  // seckillProduct
+  rpc seckillList(SeckillListReq) returns (SeckillListResp);
+  rpc seckillDetail(SeckillDetailReq) returns (SeckillDetailResp);
+
+  // others
+  rpc checkProductExists(CheckProductExistsReq) returns (CheckProductExistsResp);
+  rpc checkSeckillExists(CheckSeckillExistsReq) returns (CheckSeckillExistsResp);
+  rpc getProductListByID(GetProductListByIDReq) returns (GetProductListByIDResp);
+}
+
+message SmallProduct {
+  int64   ID = 1;
+  string  Title = 2;
+  string  Banner = 3;
+  int64   Price = 4;
+  int64   DiscountPrice = 5;
+}
+message SmallSeckill {
+  int64   SeckillID = 1;
+  string  Title = 2;
+  string  Banner = 3;
+  int64   SeckillPrice = 4;
+}
+message Product {
+  int64   ID = 1;
+  int64   CategoryID = 2;
+  string  Title = 3;
+  string  SubTitle = 4;
+  string  Banner = 5;
+  string  Introduction = 6;
+  int64   Price = 7;
+  int64   DiscountPrice = 8;
+  int64   OnSale = 9;
+  int64   SellCount = 10;
+  int64   CommentCount = 11;
+  int64   StoreID = 12;
+  int64   BossID = 13;
+}
+message SeckillProduct {
+  int64   ID = 1;
+  int64   ProductID = 2;
+  int64   CategoryID = 3;
+  string  Title = 4;
+  string  SubTitle = 5;
+  string  Banner = 6;
+  string  Introduction = 7;
+  int64   Price = 8;
+  int64   DiscountPrice = 9;
+  int64   OnSale = 10;
+  int64   SellCount = 11;
+  int64   CommentCount = 12;
+  int64   StoreID = 13;
+  int64   BossID = 14;
+  int64   SeckillPrice = 15;
+  int64   SeckillCount = 16;
+  string  StartTime = 17;
+  int64   Time = 18;
+}
+message Comment {
+  int64   ID = 1;
+  int64   UserID = 2;
+  int64   ProductID = 3;
+  int64   IsGood = 4;
+  string  Content = 5;
+  string  AddContent = 6;
+}
+
+message Carousel {
+  int64   ProductID = 1;
+  string  ImgPath = 2;
+}
+message CarouselReq {}
+message CarouselResp {
+  repeated Carousel Carousels = 1;
+}
+
+message Category {
+  int64   ID = 1;
+  string  Name = 2;
+}
+message CategoryListReq {}
+message CategoryListResp {
+  repeated Category Categories = 1;
+}
+
+message RecommendReq {}
+message RecommendResp {
+  repeated SmallProduct SmallProducts = 1;
+}
+
+message SearchProductReq {
+  string  Keyword = 1;
+  string  Sort = 2;
+  int64   OnSale = 3;
+  int64   CategoryID = 4;
+  int64   Page = 5;
+  int64   Size = 6;
+}
+message SearchProductResp {
+  repeated SmallProduct SmallProducts = 1;
+}
+
+message CategoryProductListReq {
+  int64   CategoryID = 1;
+  string  Sort = 2;
+  int64   Page = 3;
+  int64   Size = 4;
+}
+message CategoryProductListResp {
+  repeated SmallProduct SmallProducts = 1;
+}
+
+message ProductDetailReq {
+  int64 ProductID = 1;
+}
+message ProductDetailResp {
+  Product Product = 1;
+}
+
+message ProductCommentListReq {
+  int64 ProductID = 1;
+  int64 Page = 2;
+  int64 Size = 3;
+}
+message ProductCommentListResp {
+  repeated Comment Comments = 1;
+}
+
+message CreateProductReq {
+  int64   CategoryID = 1;
+  string  Title = 2;
+  string  SubTitle = 3;
+  string  Banner = 4;
+  string  Introduction = 5;
+  int64   Price = 6;
+  int64   OnSale = 7;
+  int64   Stock = 8;
+  int64   StoreID = 9;
+  int64   BossID = 10;
+}
+message CreateProductResp {}
+
+message ShelfProductReq {
+  repeated int64 ProductIDs = 1;
+  int64          BossID = 2;
+}
+message ShelfProductResp {}
+
+message UpdateProductReq {
+  int64   ProductID = 1;
+  int64   CategoryID = 2;
+  string  Title = 3;
+  string  SubTitle = 4;
+  string  Banner = 5;
+  string  Introduction = 6;
+  int64   Price = 7;
+  int64   DiscountPrice = 8;
+  int64   OnSale = 9;
+  int64   Stock = 10;
+  int64   BossID = 11;
+}
+message UpdateProductResp {}
+
+message SoldoutProductReq {
+  repeated int64 ProductIDs = 1;
+  int64          BossID = 2;
+}
+message SoldoutProductResp {}
+
+message DeleteProductReq {
+  repeated int64 ProductIDs = 1;
+  int64          BossID = 2;
+}
+message DeleteProductResp {}
+
+message CreateSeckillReq {
+  int64   ProductID = 1;
+  int64   StoreID = 2;
+  int64   SeckillPrice = 3;
+  int64   StockCount = 4;
+  string  StartTime = 5;
+  int64   Time = 6;
+  int64   BossID = 7;
+}
+message CreateSeckillResp {}
+
+message DeleteSeckillReq {
+  int64   SeckillID = 1;
+  int64   BossID = 2;
+}
+
+message DeleteSeckillResp {}
+
+message CreateCollectProductReq {
+  int64   ProductID = 1;
+  int64   UserID = 2;
+}
+message CreateCollectProductResp {}
+
+message CollectProductListReq {
+  int64   UserID = 1;
+}
+message CollectProductListResp {
+  repeated SmallProduct Products = 1;
+}
+
+message DeleteCollectProductReq {
+  int64 UserID = 1;
+  int64 ProductID = 2;
+}
+message DeleteCollectProductResp {}
+
+message SeckillListReq {
+  string  StartTime = 1;
+  int64   Time = 2;
+}
+message SeckillListResp {
+  repeated SmallSeckill SeckillList = 1;
+}
+
+message SeckillDetailReq {
+  int64   SeckillID = 1;
+}
+message SeckillDetailResp {
+  SeckillProduct Product = 1;
+}
+
+message CheckProductExistsReq {
+  int64 ProductID = 1;
+}
+message CheckProductExistsResp {
+  bool  IsExists = 1;
+}
+
+message CheckSeckillExistsReq {
+  int64 SeckillID = 1;
+}
+message CheckSeckillExistsResp {
+  bool  IsExists = 1;
+}
+
+message GetProductListByIDReq {
+  repeated int64 IDList = 1;
+}
+message GetProductListByIDResp {
+  repeated SmallProduct ProductList = 1;
+}

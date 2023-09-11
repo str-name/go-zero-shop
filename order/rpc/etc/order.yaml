@@ -1,0 +1,35 @@
+Name: order.rpc
+ListenOn: 0.0.0.0:8083
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: order.rpc
+
+# log配置
+Log:
+  ServiceName: order-rpc
+  Level: error
+
+# ProductRpc服务配置
+ProductRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: product.rpc
+  NonBlock: true
+
+# UserRpc服务配置
+UserRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: user.rpc
+  NonBlock: true
+
+# PaymentRpc服务配置
+PaymentRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: payment.rpc
+  NonBlock: true

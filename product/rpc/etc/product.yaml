@@ -1,0 +1,31 @@
+Name: product.rpc
+ListenOn: 0.0.0.0:8082
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: product.rpc
+
+# log配置
+Log:
+  ServiceName: product-rpc
+  Level: error
+
+# 七牛云配置
+Qiniu:
+  AccessKey: CDwYoreeExWYFU3w-ZMX6CmqOunbPDbIyivQo30M
+  SecretKey: eqvk6OEp35Ud1-z-wuRQE3F70-Jt94Xmi5ik2Xg2
+  Bucket: go-zero-shop-product
+  CDN: http://rvx9qktl4.hn-bkt.clouddn.com/
+  Zone: z2
+  Prefix: zero-shop
+
+# Mysql配置
+MysqlConf:
+  DSN: root:gaj991130@tcp(127.0.0.1:3306)/zero_shop_product?charset=utf8mb4&parseTime=True&loc=Local
+# Redis配置
+RedisConf:
+  Addr: 8.134.154.235:6379
+  Password: gaj991130
+  DB: 4
+  PoolSize: 100
+
