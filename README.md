@@ -4,7 +4,7 @@
 
 如果有好的项目实践欢迎大家滴滴我呀
 
-+ 参考了Mikael的[go-zero-looklook](https://github.com/Mikaelemmmm/go-zero-looklook)项目！很好的学习项目！
++ 参考了Mikael大佬的[go-zero-looklook](https://github.com/Mikaelemmmm/go-zero-looklook)项目！很好的学习项目！
 
 # 主要技术
 
