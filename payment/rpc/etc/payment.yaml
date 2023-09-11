@@ -29,5 +29,5 @@ OrderRpc:
 # KqPaymentUpdateOrderStateConf配置
 KqPaymentUpdateOrderStateConf:
   Brokers:
-    - 8.134.154.235:9092
+    - localhost:9092
   Topic: payment-update-order-state-topic
