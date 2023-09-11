@@ -11,8 +11,8 @@ var Rdb *redis.Client
 
 func init() {
 	option := redis.Options{
-		Addr:     "8.134.154.235:6379",
-		Password: "gaj991130",
+		Addr:     "localhost:6379",
+		Password: "123456",
 		DB:       4,
 		PoolSize: 100,
 	}
