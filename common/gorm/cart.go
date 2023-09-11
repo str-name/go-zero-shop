@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-const CartDSN = "root:gaj991130@tcp(127.0.0.1:3306)/zero_shop_cart?charset=utf8mb4&parseTime=True&loc=Local"
+const CartDSN = "root:123456@tcp(127.0.0.1:3306)/zero_shop_cart?charset=utf8mb4&parseTime=True&loc=Local"
 
 var CartDB *gorm.DB
 
