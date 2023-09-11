@@ -9,8 +9,8 @@ Log:
 
 # Redis配置
 RedisConf:
-  Addr: 8.134.154.235:6379
-  Password: gaj991130
+  Addr: localhost:6379
+  Password: 123456
   DB: 4
   PoolSize: 100
 
@@ -18,7 +18,7 @@ RedisConf:
 PaymentUpdateOrderState:
   Name: PaymentUpdateOrderState
   Brokers:
-    - 8.134.154.235:9092
+    - localhost:9092
   Group: payment-update-order-state-group
   Topic: payment-update-order-state-topic
   Offset: first
