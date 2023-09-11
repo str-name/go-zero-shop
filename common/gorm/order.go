@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-const OrderDSN = "root:gaj991130@tcp(127.0.0.1:3306)/zero_shop_order?charset=utf8mb4&parseTime=True&loc=Local"
+const OrderDSN = "root:123456@tcp(127.0.0.1:3306)/zero_shop_order?charset=utf8mb4&parseTime=True&loc=Local"
 
 var OrderDB *gorm.DB
 
