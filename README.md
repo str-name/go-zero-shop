@@ -12,7 +12,7 @@
 + mysql —— gorm
 + redis
 + kafka
-+ kafka
++ asynq
 
 # 微服务功能实现
 
